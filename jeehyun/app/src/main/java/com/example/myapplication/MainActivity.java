@@ -3,6 +3,8 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,5 +29,58 @@ public class MainActivity extends AppCompatActivity {
                 " 망할 세상을 뒤집기 위해, 백성이 주인인 새 세상을 향해 도치를 필두로 한 군도는 백성의 적,\n" +
                 " 조윤과 한 판 승부를 시작하는데...");
 
+        ImageButton thumb_up = findViewById(R.id.thumb_up);
+        ImageButton thumb_down = findViewById(R.id.thumb_down);
+        TextView thumb_up_count = findViewById(R.id.thumb_up_count);
+        TextView thumb_down_count = findViewById(R.id.thumb_down_count);
+
+        final boolean[] thumb_up_selected = {false};
+        final boolean[] thumb_down_selected = {false};
+
+        thumb_up.setOnClickListener(new ImageButton.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(thumb_up_selected[0] ==false){
+                    thumb_up.setImageResource(R.drawable.ic_thumb_up_selected);
+                    thumb_down.setImageResource(R.drawable.ic_thumb_down);
+                    thumb_up_count.setText(Integer.parseInt(thumb_up_count.getText().toString())+1+"");
+                    thumb_up_selected[0] =true;
+                    if(thumb_down_selected[0] == true){
+                        thumb_down_count.setText(Integer.parseInt(thumb_down_count.getText().toString())-1+"");
+                    }
+                    thumb_down_selected[0] = false;
+                }
+                else{
+                    thumb_up.setImageResource(R.drawable.ic_thumb_up);
+                    thumb_down.setImageResource(R.drawable.ic_thumb_down);
+                    thumb_up_count.setText(Integer.parseInt(thumb_up_count.getText().toString())-1+"");
+                    thumb_up_selected[0] =false;
+                    thumb_down_selected[0] = false;
+                }
+            }
+        });
+
+        thumb_down.setOnClickListener(new ImageButton.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(thumb_down_selected[0] ==false){
+                    thumb_up.setImageResource(R.drawable.ic_thumb_up);
+                    thumb_down.setImageResource(R.drawable.ic_thumb_down_selected);
+                    thumb_down_count.setText(Integer.parseInt(thumb_down_count.getText().toString())+1+"");
+                    if(thumb_up_selected[0] == true){
+                        thumb_up_count.setText(Integer.parseInt(thumb_up_count.getText().toString())-1+"");
+                    }
+                    thumb_up_selected[0] =false;
+                    thumb_down_selected[0] = true;
+                }
+                else{
+                    thumb_up.setImageResource(R.drawable.ic_thumb_up);
+                    thumb_down.setImageResource(R.drawable.ic_thumb_down);
+                    thumb_down_count.setText(Integer.parseInt(thumb_down_count.getText().toString())-1+"");
+                    thumb_up_selected[0] =false;
+                    thumb_down_selected[0] = false;
+                }
+            }
+        });
     }
 }
