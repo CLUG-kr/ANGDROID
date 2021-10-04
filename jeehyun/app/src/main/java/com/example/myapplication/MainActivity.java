@@ -3,9 +3,23 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    SingleAdapter singleAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,5 +41,127 @@ public class MainActivity extends AppCompatActivity {
                 " 망할 세상을 뒤집기 위해, 백성이 주인인 새 세상을 향해 도치를 필두로 한 군도는 백성의 적,\n" +
                 " 조윤과 한 판 승부를 시작하는데...");
 
+        ImageButton thumb_up = findViewById(R.id.thumb_up);
+        ImageButton thumb_down = findViewById(R.id.thumb_down);
+        TextView thumb_up_count = findViewById(R.id.thumb_up_count);
+        TextView thumb_down_count = findViewById(R.id.thumb_down_count);
+
+        final boolean[] thumb_up_selected = {false};
+        final boolean[] thumb_down_selected = {false};
+
+        thumb_up.setOnClickListener(new ImageButton.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(thumb_up_selected[0] ==false){
+                    thumb_up.setImageResource(R.drawable.ic_thumb_up_selected);
+                    thumb_down.setImageResource(R.drawable.ic_thumb_down);
+                    thumb_up_count.setText(Integer.parseInt(thumb_up_count.getText().toString())+1+"");
+                    thumb_up_selected[0] =true;
+                    if(thumb_down_selected[0] == true){
+                        thumb_down_count.setText(Integer.parseInt(thumb_down_count.getText().toString())-1+"");
+                    }
+                    thumb_down_selected[0] = false;
+                }
+                else{
+                    thumb_up.setImageResource(R.drawable.ic_thumb_up);
+                    thumb_down.setImageResource(R.drawable.ic_thumb_down);
+                    thumb_up_count.setText(Integer.parseInt(thumb_up_count.getText().toString())-1+"");
+                    thumb_up_selected[0] =false;
+                    thumb_down_selected[0] = false;
+                }
+            }
+        });
+
+        thumb_down.setOnClickListener(new ImageButton.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(thumb_down_selected[0] ==false){
+                    thumb_up.setImageResource(R.drawable.ic_thumb_up);
+                    thumb_down.setImageResource(R.drawable.ic_thumb_down_selected);
+                    thumb_down_count.setText(Integer.parseInt(thumb_down_count.getText().toString())+1+"");
+                    if(thumb_up_selected[0] == true){
+                        thumb_up_count.setText(Integer.parseInt(thumb_up_count.getText().toString())-1+"");
+                    }
+                    thumb_up_selected[0] =false;
+                    thumb_down_selected[0] = true;
+                }
+                else{
+                    thumb_up.setImageResource(R.drawable.ic_thumb_up);
+                    thumb_down.setImageResource(R.drawable.ic_thumb_down);
+                    thumb_down_count.setText(Integer.parseInt(thumb_down_count.getText().toString())-1+"");
+                    thumb_up_selected[0] =false;
+                    thumb_down_selected[0] = false;
+                }
+            }
+        });
+
+        ListView listView = findViewById(R.id.listView);
+
+        singleAdapter = new SingleAdapter();
+        singleAdapter.addItem(new SingleItem("jihyun1",2, (float) 3.5, "괜찮은 영화였어요.", 3));
+        singleAdapter.addItem(new SingleItem("jihyun2",10, (float) 2.5, "좋은 영화였어요.", 0));
+        singleAdapter.addItem(new SingleItem("jihyun3",1, (float) 3.0, "즐거운 영화였어요.", 3));
+        singleAdapter.addItem(new SingleItem("jihyun4",12, (float) 3.5, "괜찮은 영화였어요.", 0));
+        singleAdapter.addItem(new SingleItem("jihyun5",3, (float) 2.5, "즐거운 영화였어요.", 3));
+        singleAdapter.addItem(new SingleItem("jihyun6",4, (float) 2.5, "즐거운 영화였어요.", 1));
+        singleAdapter.addItem(new SingleItem("jihyun7",5, (float) 3.5, "좋은 영화였어요.", 1));
+
+        listView.setAdapter(singleAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                SingleItem item = (SingleItem) singleAdapter.getItem(position);
+                Toast.makeText(getApplicationContext(),item.getId()+"님이 작성하신 한줄평입니다.",Toast.LENGTH_LONG).show();
+                Log.i("클릭: " ,item.getId()+"님이 작성하신 한줄평입니다.");
+            }
+        });
+
+        //이중스크롤 제어
+        ScrollView scrollView = findViewById(R.id.scrollView);
+        listView.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                scrollView.requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+
+    }
+
+    class SingleAdapter extends BaseAdapter{
+
+        ArrayList<SingleItem> items = new ArrayList<SingleItem>();
+
+        @Override
+        public int getCount() {
+            return items.size();
+        }
+
+        public void addItem(SingleItem item){
+            items.add(item);
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return items.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            SingleItemView view = new SingleItemView(getApplicationContext());
+            SingleItem item = items.get(position);
+            view.setUserId(item.id);
+            view.setComment(item.comment);
+            view.setRecommend_count(item.recommend_count);
+            view.setStars(item.stars_count);
+            view.setTime(item.time);
+            return view;
+        }
     }
 }

@@ -7,8 +7,8 @@
     android:background="#C2C2C2"
     tools:context=".MainActivity">
 
-
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
@@ -22,7 +22,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="240dp"
         android:background="#2B49A2"
         tools:ignore="MissingConstraints">
 
@@ -30,9 +30,9 @@
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="4dp"
             android:src="@drawable/image11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="80dp"
             android:text="군도"
             android:textColor="@color/white"
             android:textSize="20dp"
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="80dp"
             android:src="@drawable/ic_15"
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent" />
@@ -69,7 +69,7 @@
             android:layout_marginTop="15dp"
             android:text="2014.07.23 개봉"
             android:textColor="@color/white"
-            android:textSize="15dp"
+            android:textSize="18dp"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -82,15 +82,15 @@
             android:layout_marginTop="5dp"
             android:text="액션 / 137분"
             android:textColor="@color/white"
-            android:textSize="15dp"
+            android:textSize="18dp"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="7dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -108,7 +108,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="3dp"
                 android:text="15"
                 android:textColor="@color/white"
                 android:textSize="18dp" />
@@ -126,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="3dp"
+
                 android:text="15"
                 android:textColor="@color/white"
                 android:textSize="18dp" />
@@ -148,7 +147,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="1dp"
-            android:background="#E5E5E5"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <TextView
@@ -165,7 +164,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#E5E5E5"
+            android:background="@color/white"
             android:gravity="center"
             android:layout_margin="1dp"
             android:orientation="vertical">
@@ -213,7 +212,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="1dp"
-            android:background="#E5E5E5">
+            android:background="@color/white">
 
             <TextView
                 android:layout_width="match_parent"
@@ -231,7 +230,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="#E5E5E5"
+        android:background="@color/white"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
@@ -266,7 +265,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="#E5E5E5"
+        android:background="@color/white"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
@@ -332,9 +331,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="500dp"
         android:layout_marginTop="10dp"
-        android:background="#E5E5E5"
+        android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
@@ -378,16 +377,46 @@
 
         </LinearLayout>
 
-        <Button
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="70dp"
+            android:orientation="vertical"
+            android:fillViewport="true"
+            android:layout_marginBottom="70dp">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+           />
+
+        </LinearLayout>
+
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_marginBottom="20dp"
-            android:text="모두 보기"
-            android:textStyle="bold"
-            android:backgroundTint="@color/white"
-            android:textColor="#D962B8"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="모두 보기"
+                android:textColor="#D962B8"
+                android:textStyle="bold" />
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -402,7 +431,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_facebook"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:backgroundTint="#00FFFFFF"/>
 
             <ImageButton
