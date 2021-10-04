@@ -377,8 +377,7 @@
 
         </LinearLayout>
 
-
-        <LinearLayout
+        <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="70dp"
@@ -402,7 +401,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent" />
 
             <ImageButton
                 android:layout_width="match_parent"

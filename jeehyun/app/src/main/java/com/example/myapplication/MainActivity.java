@@ -3,6 +3,7 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+<<<<<<< HEAD
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,6 +13,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ScrollView;
+=======
+import android.view.View;
+import android.widget.ImageButton;
+>>>>>>> jihyun
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -94,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+<<<<<<< HEAD
 
         ListView listView = findViewById(R.id.listView);
 
@@ -163,5 +169,7 @@ public class MainActivity extends AppCompatActivity {
             view.setTime(item.time);
             return view;
         }
+=======
+>>>>>>> jihyun
     }
 }
