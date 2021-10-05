@@ -1,9 +1,7 @@
 package com.example.myapplication;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-<<<<<<< HEAD
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,10 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ScrollView;
-=======
-import android.view.View;
-import android.widget.ImageButton;
->>>>>>> jihyun
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         TextView movie_text = findViewById(R.id.movie_text);
         movie_text.setText("군도, 백성을 구하라!\n" +
                 " 양반과 탐관오리들의 착취가 극에 달했던 조선 철종 13년. 힘 없는 백성의 편이 되어\n" +
@@ -99,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-<<<<<<< HEAD
 
         ListView listView = findViewById(R.id.listView);
 
@@ -169,7 +161,5 @@ public class MainActivity extends AppCompatActivity {
             view.setTime(item.time);
             return view;
         }
-=======
->>>>>>> jihyun
     }
 }
