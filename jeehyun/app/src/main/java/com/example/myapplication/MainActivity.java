@@ -3,11 +3,28 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+<<<<<<< HEAD
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.ScrollView;
+=======
 import android.view.View;
 import android.widget.ImageButton;
+>>>>>>> jihyun
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    SingleAdapter singleAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,5 +99,77 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+<<<<<<< HEAD
+
+        ListView listView = findViewById(R.id.listView);
+
+        singleAdapter = new SingleAdapter();
+        singleAdapter.addItem(new SingleItem("jihyun1",2, (float) 3.5, "괜찮은 영화였어요.", 3));
+        singleAdapter.addItem(new SingleItem("jihyun2",10, (float) 2.5, "좋은 영화였어요.", 0));
+        singleAdapter.addItem(new SingleItem("jihyun3",1, (float) 3.0, "즐거운 영화였어요.", 3));
+        singleAdapter.addItem(new SingleItem("jihyun4",12, (float) 3.5, "괜찮은 영화였어요.", 0));
+        singleAdapter.addItem(new SingleItem("jihyun5",3, (float) 2.5, "즐거운 영화였어요.", 3));
+        singleAdapter.addItem(new SingleItem("jihyun6",4, (float) 2.5, "즐거운 영화였어요.", 1));
+        singleAdapter.addItem(new SingleItem("jihyun7",5, (float) 3.5, "좋은 영화였어요.", 1));
+
+        listView.setAdapter(singleAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                SingleItem item = (SingleItem) singleAdapter.getItem(position);
+                Toast.makeText(getApplicationContext(),item.getId()+"님이 작성하신 한줄평입니다.",Toast.LENGTH_LONG).show();
+                Log.i("클릭: " ,item.getId()+"님이 작성하신 한줄평입니다.");
+            }
+        });
+
+        //이중스크롤 제어
+        ScrollView scrollView = findViewById(R.id.scrollView);
+        listView.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                scrollView.requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+
+    }
+
+    class SingleAdapter extends BaseAdapter{
+
+        ArrayList<SingleItem> items = new ArrayList<SingleItem>();
+
+        @Override
+        public int getCount() {
+            return items.size();
+        }
+
+        public void addItem(SingleItem item){
+            items.add(item);
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return items.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            SingleItemView view = new SingleItemView(getApplicationContext());
+            SingleItem item = items.get(position);
+            view.setUserId(item.id);
+            view.setComment(item.comment);
+            view.setRecommend_count(item.recommend_count);
+            view.setStars(item.stars_count);
+            view.setTime(item.time);
+            return view;
+        }
+=======
+>>>>>>> jihyun
     }
 }
