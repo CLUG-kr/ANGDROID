@@ -36,11 +36,11 @@ public class SingleItemView extends ConstraintLayout {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         layoutInflater.inflate(R.layout.single_item,this,true);
 
-         userId = findViewById(R.id.userId);
-         time = findViewById(R.id.time);
-         stars = findViewById(R.id.stars);
-         comment= findViewById(R.id.comment);
-         recommend_count = findViewById(R.id.recommend_count);
+        userId = findViewById(R.id.userId);
+        time = findViewById(R.id.time);
+        stars = findViewById(R.id.stars);
+        comment= findViewById(R.id.comment);
+        recommend_count = findViewById(R.id.recommend_count);
 
 
     }
