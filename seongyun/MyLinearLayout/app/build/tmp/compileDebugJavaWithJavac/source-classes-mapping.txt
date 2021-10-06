@@ -1,0 +1,4 @@
+com/example/mylinearlayout/MainActivity.java
+ com.example.mylinearlayout.MainActivity
+com/example/mylinearlayout/BuildConfig.java
+ com.example.mylinearlayout.BuildConfig
