@@ -1,6 +1,8 @@
 package com.example.myapplication;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -19,11 +22,16 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     SingleAdapter singleAdapter;
+    String review;
+    Float stars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
         TextView movie_text = findViewById(R.id.movie_text);
         movie_text.setText("군도, 백성을 구하라!\n" +
                 " 양반과 탐관오리들의 착취가 극에 달했던 조선 철종 13년. 힘 없는 백성의 편이 되어\n" +
@@ -104,6 +112,20 @@ public class MainActivity extends AppCompatActivity {
         singleAdapter.addItem(new SingleItem("jihyun6",4, (float) 2.5, "즐거운 영화였어요.", 1));
         singleAdapter.addItem(new SingleItem("jihyun7",5, (float) 3.5, "좋은 영화였어요.", 1));
 
+
+        Intent intent = getIntent();
+        stars = intent.getFloatExtra("stars",-1);
+
+        if(stars!=(float)(-1)){
+            review = intent.getStringExtra("review");
+            singleAdapter.addItem(new SingleItem("jihyun",1, (float) stars, review, 0));
+        }
+        else{
+            review = null;
+        }
+
+
+
         listView.setAdapter(singleAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -122,6 +144,33 @@ public class MainActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 scrollView.requestDisallowInterceptTouchEvent(true);
                 return false;
+            }
+        });
+
+        //작성하기
+        LinearLayout addReview = findViewById(R.id.addReview);
+        TextView movieTitle = findViewById(R.id.movie_title);
+        addReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AddReviewActivity.class);
+                intent.putExtra("movieTitle",movieTitle.getText().toString());
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        //전체보기
+        ImageButton lookAll = findViewById(R.id.lookAll);
+        lookAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ReviewDetailActivity.class);
+                intent.putExtra("movieTitle",movieTitle.getText().toString());
+                intent.putExtra("review",review);
+                intent.putExtra("stars",stars);
+                startActivity(intent);
+                finish();
             }
         });
 
