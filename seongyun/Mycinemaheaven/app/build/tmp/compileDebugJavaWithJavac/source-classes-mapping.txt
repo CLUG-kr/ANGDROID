@@ -1,0 +1,4 @@
+com/example/mycinemaheaven/MainActivity.java
+ com.example.mycinemaheaven.MainActivity
+com/example/mycinemaheaven/BuildConfig.java
+ com.example.mycinemaheaven.BuildConfig
