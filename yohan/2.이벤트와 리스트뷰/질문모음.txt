@@ -1,0 +1,13 @@
+이벤트도 일종의 메소드인가?
+
+toast.makeText(this,"시스템 Back 눌림")에서 this가 가리키는 것은 인스턴스 자신이다.
+
+toast의 parameter에서 getApplicationContext()는 무엇을 의미하는 걸까?
+-안드로이드에서 context에 대한 개념은 실행되는 앱에 대한 전역환경 정보를 가진 친구다.
+-안드로이드 프레임워크에서 context는 두가지 종류로 나뉜다- application context, activity context
+-애플리케이션 context는 애플리케이션 자체의 생명주기에 영향을 받는다.
+-중요한 것은 이 두개의 context는 모두 context 클래스를 상속받아 만들어졌다.
+-getApplicationContext()는 클래스 메소드이기 때문에, 인스턴스 객체를 만들어서 메소드를 써도 되고, 곧바로 클래스 메소드로 써도 상관이 없다.
+
+
+

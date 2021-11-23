@@ -1,0 +1,134 @@
+애플리케이션 구성요소, 액티비티 서비스, 브로드캐스트 리시버, 컨텐트 프로바이더 시스템에서 관리
+시스템에 요청을 해서 시스템이 띄워야 함. 
+시스템이 알아먹을 수 있는 포멧이 인텐트이다.
+
+인텐트를 이용해서 다른 화면을 띄울 수 도 있지만
+인텐트 객체 자체도 다른 화면으로 전달 될 수 있다.
+
+인텐트-> '부가데이터'라는 형태로 넣으면 시스템은 데이터를 건드리지 않고 구성요소까지 전달을 해준다.
+
+1차 summary 
+-실습과정: 버튼,레이팅바 넣기-> 버튼 클릭하면 새로운 화면을 띄워주기->새로운 화면에 EditText 추가해서 작성하기 화면처럼 만들어보기->작성하기 화면에서 다시 버튼을 눌렀을 떄 원래 화면으로 돌아오면서 데이터 전달
+
+activity_main_xml에서 최상위 레이아웃 리니어로 변경하고, 레이팅 바와 버튼 뷰 하나씩 만든다. 
+레이팅 바 설정을 xml파일에서 해준다.
+그담 메인엑티비티.자바로 들어가서 이 두개의 뷰를 찾아내고
+레이팅바의 값을 작성하기 화면으로 넘기는 과정을 코드로 짜볼 것이다.
+변수선언 아이디 찾기: RatingBar rating Bar;   ratingBar=(RatingBar) findViewById(R.id.ratingBar);
+버튼 아이디 찾기:  
+버튼.셋온클릭리스너(이벤트처리 코드)
+{ 쇼코맨트라이트액티비티라는 메소드를 안에 쓴다}
+public void showcommentwriteActicity(별도로 메소드를 처리하기)
+뉴->액티비티>뉴액티비티 해서 새로운 액티비티를 만든다.
+그러면 또 하나의 레이아웃 xml, java파일이 만들어진다
+작성하기 액티비티도 최상위레이아웃을 linearlayout으로 만들어준다.
+작성하기액티비티에 입력상자 띄운다.
+
+버튼을 눌렀을 때 액티비티를 띄우려면 인텐트를 만들어야 한다.
+Intent intent=new Intent();
+인텐트 객체의 파라미터로 액티비티를 지정할 수 있다.
+첫번째는 파라미터는  getApplicationContext,두번째는 CommentWriteActivity.class(클래스 인스턴스로 지정)이다.
+startActivityforresult(intent,requestCode:101);
+인텐트가 넘어갈때 레이팅바의 값도 같이 전달하고 싶다고 했다! 그러면 
+float rating= ratingBar.getRating();
+intent.PutExtra(name:"rating",rating);
+이렇게되면 인텐트의 부가데이터로 rating이 커멘트액티비티로 전달이 될 것이다.
+커멘트액티비티에선 이 값을 받을 수 가 있다.
+자 이제 커멘트액티비티.자바로 들어가서
+
+Intent intent=getIntent(); (날라온 인텐트를 변수로 받아주는 과정이다)
+processIntent(intent); (사용자 지정 메소드다 밑에 따로 정의해야한다.)
+private void processintent(intent){
+if (intent!=null){
+float rating= intent.getFloatExtra(name:rating,0.0f);
+자 이번엔 커멘트액티비티xml파일에도 새로운 레이팅 바를 만들어준다.
+커멘트.java 파일에서 이제 ratingBar.setRating(rating); 이렇게 해주면 커멘트 액티비티 자바에 있는 레이팅 바에 전달된 레이팅 값을 할당해줄 수 있게 된다.
+실행해보면 잘 된다./~~
+
+이번에는 입력상자의 값도 한번 넣어볼까요?
+커멘트xml파일에 에딧 텍스트를 만들어준다.
+xml파일에서 에딧텍스트 여러 설정기능을 편집해준다.
+드러블 설정도 해준다.
+-res->drawable에서 새로 만들기 하면 drawble 폴더 안에 새로운 xml파일을 만들 수 있다. border.xml이라고 이름의 xml파일을 생성한다.
+drawble xml파일에 설정을 해준다.
+ <shape android:padding="10dp"
+   android:shape="rectangle"
+<solid android:color='#FFFFFF" />
+<stroke android:width"1dp" android:color="#FE9A2E"/>
+<corners
+ android:radius=10dp"/>
+ </shape>
+이런식으로 xml으로 코드 짜주고
+
+android:background="@drawable/border"/>
+
+이렇게 하면 사용자지정된 drawble이 적용되는 것을 알 수 있다
+
+내가 만든 edittext의 id를 생성한다.
+
+커멘트 자바에서
+ Edit Text contentsInput;
+
+ contentsInput =(EditText) findViewById (R.id. contentsInput);
+
+
+그담 xml파일에서 리뷰 칸 밑에 버튼 하나를 생성해준다.
+
+아이디는 saveButton이라고 해준다.
+
+자바파일에서 Button saveButton =(Button) findViewById(R.id.saveButton);
+saveButton.setonClickListetner(~ 자동완성됌)
+
+자동완성된 코드 중 public void onClick(View view){
+}안에다가
+returnToMain(); 이라는 사용자지정메소드를 만들고 그 밑에 정의해준다.
+
+
+public void returnTomain(){
+String contents =contentsInput.getText().tostring(); (contentsinput이라 하는 에딧텍스트에서  .getText()를 가지고 오면  그게 contents라는 문자열이 되는 거겠져?
+
+Intent_intent=new Intent();  (인텐트에는 액션이라는 정보가 기본적으로 들어가게 되어있다. 시스템에서 아무일도안하고 인텐트라는 객체만 전달하고 싶다라고 할 수 도 있다. 그러면따로 파라미터 값을 넣을 필요가 없게 된다.)
+거기에 extra data만 넣어도 된다.
+intent.putExtra(name:'contents", contents);
+ 
+setResult(RESULT_ok,intent); 이렇게 전달을 하면 이전액티비티로  인텐트를 전달할 수 있을 것이다. 그러면 메인엑티비티에서 받게 될텐데, 응답을 받으려고 하면 어떻게 하면 될까요?
+
+메인엑티비티.자바에 들어가서
+
+제네레이터->온액티비티로시작하는거 자동으로 호출해주는거 클릭해준다.
+여기서 필요한 작업을 해주면 된다.
+
+그 코드 안에서
+ if (request Code==101){
+	if (intent!=null){
+		string contents = intent.getStringExtra("contents");
+
+
+
+
+finish();
+
+이렇게 하면 스트링값을 받을 수 있게 된다.
+
+xml파일에서 텍스트뷰를 만들어서 거기에 값을 넣어보자
+
+outputView.setText(contents); (라고 해주면 아마 textview의 메소드인거같은데 컨텐츠(이건 엑스트라데이터에서 갖고있는 스트링 값이다) 를 출력해주는 메소드인거같다.)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
